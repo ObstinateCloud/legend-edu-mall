@@ -28,7 +28,13 @@ export default {
   name: 'AppAside',
   data () {
     return {
-      isCollapse: false
+
+    }
+  },
+  props: {
+    isCollapse: {
+      type: Boolean,
+      default: false
     }
   }
 }

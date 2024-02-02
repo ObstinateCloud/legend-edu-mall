@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div class="app-header">
+    <i :class="iconClassName" @click="toggleCollapse"></i>
     <el-dropdown>
-      <i class="el-icon-setting" style="margin-right: 15px"></i>
+      <i class="el-icon-setting" style="margin-left:50px"></i>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item>查看</el-dropdown-item>
         <el-dropdown-item>新增</el-dropdown-item>
@@ -14,6 +15,27 @@
 
 <script>
 export default {
-  name: 'AppHeader'
+  name: 'AppHeader',
+  props: {
+    isCollapse: {
+      type: Boolean,
+      default: false
+    },
+    toggleCollapse: {
+      type: Function,
+      required: true
+    }
+  },
+  computed: {
+    iconClassName () {
+      return this.isCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'
+    }
+  }
+
 }
 </script>
+<style lang="scss" scoped>
+.app-header {
+  text-align: left;
+}
+</style>
