@@ -15,11 +15,10 @@
   </div>
 </template>
 <script>
-
-import { login } from '@/api/user'
+import zjyrequest from '@/utils/request'
 
 export default {
-  name: 'LoginVue',
+  name: 'LoginVueV1',
   data () {
     return {
       formData: {
@@ -40,14 +39,21 @@ export default {
   },
   methods: {
     onSubmit () {
-      this.$refs.form
-        .validate()
+      this.$refs.form.validate()
         .then(() => {
-          // this.$message.success('表单验证通过')
-          return login(this.formData)
-        })
-        .then((res) => {
-          console.log(res.data)
+          this.$message.success('表单验证通过')
+          zjyrequest({ // 会拼接baseusrl
+            method: 'POST',
+            url: '/login/userAndPwd',
+            // params: { // 方式1
+            //   username: this.formData.username,
+            //   password: this.formData.password
+            // },
+            // data: this.formData // 方式3，需要与后台接收方式一致，默认为json对象 对应application-json
+            data: `username=${this.formData.username}&password=${this.formData.password}` // 方式2 'application/x-www-form-urlencoded'
+          }).then(res => {
+            console.log(res.data)
+          })
         })
         .catch(() => {
           this.$message.error('表单验证失败')
