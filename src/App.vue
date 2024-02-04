@@ -4,6 +4,31 @@
   </div>
 </template>
 
+<script>
+import zjyrequest from '@/utils/request'
+zjyrequest({ // 会拼接baseusrl
+  method: 'GET',
+  url: '/hello/sayHello'
+}).then(res => {
+  console.log(res)
+})
+
+// import axios from 'axios'
+
+// axios({
+//   method: 'GET',
+//   url: 'http://localhost:8888/hello/sayHello'
+// }).then(res => {
+//   console.log(res)
+// }).catch(err => {
+//   console.log(err)
+// })
+
+export default {
+  name: 'MyApp'
+}
+</script>
+
 <style lang="scss">
 @import "./styles/index.scss";
 #app {
