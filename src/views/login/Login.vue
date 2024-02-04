@@ -48,12 +48,14 @@ export default {
           return login(this.formData)
         })
         .then((res) => {
+          const { data } = res
           console.log(res.data)
-          if (res.data === 'success') {
+          if (data.code === 200) {
             this.$message.success('登录成功')
             // this.$router.push('/')// 使用路由路径跳转
             this.$router.push({ name: 'home' })// 使用路由名称跳转，名称更推荐一般不变
-          } else if (res.data === 'error') {
+            this.$store.commit('changeLoginResponse', data)
+          } else if (data.code === 201) {
             this.$message.error('用户名或密码错误')
           }
         })
