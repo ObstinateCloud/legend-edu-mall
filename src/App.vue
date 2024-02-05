@@ -5,13 +5,13 @@
 </template>
 
 <script>
-import zjyrequest from '@/utils/request'
-zjyrequest({ // 会拼接baseusrl
-  method: 'GET',
-  url: '/hello/sayHello'
-}).then(res => {
-  console.log(res)
-})
+// import zjyrequest from '@/utils/request'
+// zjyrequest({ // 会拼接baseusrl
+//   method: 'GET',
+//   url: '/hello/sayHello'
+// }).then(res => {
+//   console.log(res)
+// })
 
 // import axios from 'axios'
 

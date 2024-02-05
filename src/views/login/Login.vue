@@ -46,6 +46,7 @@ export default {
         .validate()
         .then(() => {
           return login(this.formData)
+          // return loginStr(this.formData)
         })
         .then((res) => {
           const { data } = res
@@ -53,11 +54,21 @@ export default {
           if (data.code === 200) {
             this.$message.success('登录成功')
             // this.$router.push('/')// 使用路由路径跳转
-            this.$router.push({ name: 'home' })// 使用路由名称跳转，名称更推荐一般不变
             this.$store.commit('changeLoginResponse', data)
+            // this.$router.push({ name: 'home' })// 使用路由名称跳转，名称更推荐一般不变
+            this.$router.push(this.$route.query.redirect || 'home')// 使用路由名称跳转，名称更推荐一般不变
           } else if (data.code === 201) {
             this.$message.error('用户名或密码错误')
           }
+          // console.log(res.data)
+          // if (res.data === 'success') {
+          //   this.$message.success('登录成功')
+          //   // this.$router.push('/')// 使用路由路径跳转
+          //   this.$router.push({ name: 'home' })// 使用路由名称跳转，名称更推荐一般不变
+          //   this.$store.commit('changeLoginResponse', res.data)
+          // } else if (res.data === 'error') {
+          //   this.$message.error('用户名或密码错误')
+          // }
         })
         .catch(() => {
           this.$message.error('表单验证失败')
