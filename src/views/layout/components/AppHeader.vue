@@ -7,13 +7,13 @@
       <el-breadcrumb-item>活动列表</el-breadcrumb-item>
       <el-breadcrumb-item>活动详情</el-breadcrumb-item>
     </el-breadcrumb>
-  <el-dropdown>
+  <el-dropdown @command="handleCommand">
   <span class="el-dropdown-link">
     <el-avatar :size="40" :src="userInfo.avatar"></el-avatar><i class="el-icon-arrow-down el-icon--right"></i>
   </span>
-  <el-dropdown-menu slot="dropdown">
-    <el-dropdown-item divided>{{userInfo.name}}</el-dropdown-item>
-    <el-dropdown-item divided>登出</el-dropdown-item>
+  <el-dropdown-menu slot="dropdown" >
+    <el-dropdown-item divided command='a'>{{userInfo.name}}</el-dropdown-item>
+    <el-dropdown-item divided @click.native="handleLogout">登出</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
   </div>
@@ -50,6 +50,29 @@ export default {
       console.log(data)
       this.userInfo = data.data
     })
+  },
+  methods: {
+    handleLogout () {
+      this.$confirm('确认退出登录吗', '退出提示', {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(() => {
+          this.$store.commit('changeLoginResponse', null)
+          this.$message.success('退出成功')
+          this.$router.push('/login')
+        })
+        .catch(() => {
+          this.$message.success('退出失败')
+        })
+    },
+    handleCommand (command) {
+      console.log(command)
+      if (command === 'a') {
+        this.$message.info('Hello ' + this.userInfo.name)
+      }
+    }
   }
 }
 </script>
