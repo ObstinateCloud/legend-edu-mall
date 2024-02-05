@@ -50,13 +50,16 @@ export default {
         })
         .then((res) => {
           const { data } = res
-          console.log(res.data)
+          console.log(typeof data + '---')
+          console.log(data)
           if (data.code === 200) {
             this.$message.success('登录成功')
             // this.$router.push('/')// 使用路由路径跳转
-            this.$store.commit('changeLoginResponse', data)
+            console.log(typeof data.data + '==')
+            console.log(data.data)
+            this.$store.commit('changeLoginResponse', data.data)
             // this.$router.push({ name: 'home' })// 使用路由名称跳转，名称更推荐一般不变
-            this.$router.push(this.$route.query.redirect || 'home')// 使用路由名称跳转，名称更推荐一般不变
+            this.$router.push(this.$route.query.redirect || '/')// / 此处只能用路径,不能用名称
           } else if (data.code === 201) {
             this.$message.error('用户名或密码错误')
           }

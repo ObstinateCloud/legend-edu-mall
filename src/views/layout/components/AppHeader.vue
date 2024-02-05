@@ -9,10 +9,10 @@
     </el-breadcrumb>
   <el-dropdown>
   <span class="el-dropdown-link">
-    <el-avatar :size="40" :src="circleUrl"></el-avatar><i class="el-icon-arrow-down el-icon--right"></i>
+    <el-avatar :size="40" :src="userInfo.avatar"></el-avatar><i class="el-icon-arrow-down el-icon--right"></i>
   </span>
   <el-dropdown-menu slot="dropdown">
-    <el-dropdown-item divided>个人信息</el-dropdown-item>
+    <el-dropdown-item divided>{{userInfo.name}}</el-dropdown-item>
     <el-dropdown-item divided>登出</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
@@ -20,11 +20,13 @@
 </template>
 
 <script>
+import { getUserInfo } from '@/api/user'
+
 export default {
   name: 'AppHeader',
   data () {
     return {
-      circleUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
+      userInfo: {}
     }
   },
   props: {
@@ -41,8 +43,14 @@ export default {
     iconClassName () {
       return this.isCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'
     }
+  },
+  created () {
+    getUserInfo().then(res => {
+      const { data } = res
+      console.log(data)
+      this.userInfo = data.data
+    })
   }
-
 }
 </script>
 <style lang="scss" scoped>
