@@ -13,6 +13,7 @@
   </span>
   <el-dropdown-menu slot="dropdown" >
     <el-dropdown-item divided command='a'>{{userInfo.name}}</el-dropdown-item>
+    <el-dropdown-item divided command='b'>刷新token</el-dropdown-item>
     <el-dropdown-item divided @click.native="handleLogout">登出</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
@@ -20,7 +21,7 @@
 </template>
 
 <script>
-import { getUserInfo } from '@/api/user'
+import { getUserInfo, refreshToken } from '@/api/user'
 
 export default {
   name: 'AppHeader',
@@ -71,6 +72,8 @@ export default {
       console.log(command)
       if (command === 'a') {
         this.$message.info('Hello ' + this.userInfo.name)
+      } else if (command === 'b') {
+        refreshToken()
       }
     }
   }
