@@ -19,7 +19,7 @@
     <el-submenu index="4">
       <template slot="title"><i class="el-icon-setting"></i><span>广告管理</span></template>
         <el-menu-item index="ads">广告列表</el-menu-item>
-        <el-menu-item index="adsbit">广告位列表</el-menu-item>
+        <el-menu-item index="adbits">广告位列表</el-menu-item>
     </el-submenu>
   </el-menu>
 </template>
