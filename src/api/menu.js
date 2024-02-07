@@ -14,3 +14,10 @@ export const addMenu = (addData) => {
     data: addData
   })
 }
+
+export const delMenu = (menuId = 0) => {
+  return zjyrequest({
+    method: 'DELETE',
+    url: `/menus/delMenu/${menuId}`
+  })
+}

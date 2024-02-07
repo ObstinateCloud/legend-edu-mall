@@ -12,9 +12,9 @@
         <el-table-column prop="path" label="地址"> </el-table-column>
         <el-table-column prop="router" label="路由"> </el-table-column>
         <el-table-column label="操作" width="180">
-          <template >
+          <template v-slot="scoped">
             <el-button size="mini">编辑</el-button>
-            <el-button size="mini" type="danger">删除</el-button>
+            <el-button size="mini" type="danger" @click="deleteMenu(scoped.row.id)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -22,7 +22,7 @@
   </div>
 </template>
 <script>
-import { getAllMenus } from '@/api/menu'
+import { getAllMenus, delMenu } from '@/api/menu'
 
 export default {
   name: 'MenuIndex',
@@ -38,6 +38,18 @@ export default {
     loadMenus () {
       getAllMenus().then((res) => {
         this.tableData = res.data.data
+      })
+    },
+    deleteMenu (menuId) {
+      this.$confirm('确认删除菜单吗', '删除提示').then(() => {
+        delMenu(menuId).then((res) => {
+          console.log(res.data.data)
+          this.$message.success('删除菜单成功')
+          // 刷新菜单列表
+          this.loadMenus()
+        })
+      }).catch((er) => {
+        this.$message.info('取消删除菜单')
       })
     }
   }
