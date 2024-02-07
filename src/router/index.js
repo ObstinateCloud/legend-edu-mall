@@ -38,6 +38,11 @@ const routes = [
         component: AddMenu
       },
       {
+        path: 'menus/:id/edit', // id传参
+        name: 'edit-menu',
+        component: AddMenu
+      },
+      {
         path: 'about',
         name: 'about',
         component: About,

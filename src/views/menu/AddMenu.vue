@@ -22,7 +22,7 @@
     <el-input v-model="addData.sort" type="number"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="onSubmit">立即创建</el-button>
+    <el-button type="primary" @click="onSubmit">立即{{tipMsg}}</el-button>
     <el-button>取消</el-button>
   </el-form-item>
 </el-form>
@@ -41,23 +41,30 @@ export default {
         parentId: '',
         sort: 0
       },
-      parentMenus: []
+      parentMenus: [],
+      isCreate: false // 根据路由信息中是否携带id来判断，是修改还是创建
     }
   },
   created () {
     this.loadAll()
+    this.isCreate = !this.$route.params.id // 新增时没有传id 默认为undefind 取反为true 传值后取反为false
+  },
+  computed: {
+    tipMsg () {
+      return this.isCreate ? '新增' : '编辑'
+    }
   },
   methods: {
     onSubmit () {
       addMenu(this.addData).then((res) => {
         if (res.data.code === 200) {
           console.log(res.data.data.id)
-          this.$message.success('添加成功:' + res.data.data.id)
+          this.$message.success(`${this.tipMsg}成功:` + res.data.data.id)
           this.$router.push({
             name: 'menus'
           })
         } else {
-          this.$message.warning('添加失败')
+          this.$message.warning(`${this.tipMsg}失败`)
         }
       })
     },

@@ -13,7 +13,7 @@
         <el-table-column prop="router" label="路由"> </el-table-column>
         <el-table-column label="操作" width="180">
           <template v-slot="scoped">
-            <el-button size="mini">编辑</el-button>
+            <el-button size="mini" @click="$router.push({ name: 'edit-menu', params: { id: scoped.row.id}})">编辑</el-button>
             <el-button size="mini" type="danger" @click="deleteMenu(scoped.row.id)">删除</el-button>
           </template>
         </el-table-column>
