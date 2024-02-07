@@ -6,3 +6,11 @@ export const getAllMenus = () => {
     url: '/menus/getAllMenus'
   })
 }
+
+export const addMenu = (addData) => {
+  return zjyrequest({
+    method: 'POST',
+    url: '/menus/addMenu',
+    data: addData
+  })
+}

@@ -5,8 +5,9 @@ import Home from '@/views/home/HomeIndex'
 import About from '@/views/about/About'
 import Error404 from '@/views/error/Error'
 import LoginVue from '@/views/login/Login'
-import MenuIndex from '@/views/menu/MenuIndex'
 import store from '@/store/index'
+import MenuIndex from '@/views/menu/MenuIndex'
+import AddMenu from '@/views/menu/AddMenu'
 
 Vue.use(VueRouter)
 
@@ -27,9 +28,14 @@ const routes = [
         component: Home
       },
       {
-        path: 'menus', // '/'必须加
+        path: 'menus', //
         name: 'menus',
         component: MenuIndex
+      },
+      {
+        path: 'menus/create', //
+        name: 'add-menu',
+        component: AddMenu
       },
       {
         path: 'about',
