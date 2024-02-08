@@ -8,6 +8,7 @@ import LoginVue from '@/views/login/Login'
 import store from '@/store/index'
 import MenuIndex from '@/views/menu/MenuIndex'
 import AddMenu from '@/views/menu/AddMenu'
+import SourceTypeList from '@/views/sources/SourceTypeList'
 
 Vue.use(VueRouter)
 
@@ -41,6 +42,11 @@ const routes = [
         path: 'menus/:id/edit', // id传参
         name: 'edit-menu',
         component: AddMenu
+      },
+      {
+        path: 'source/source-type/list', // id传参
+        name: 'source-type-list',
+        component: SourceTypeList
       },
       {
         path: 'about',
