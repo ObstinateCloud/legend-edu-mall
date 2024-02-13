@@ -24,3 +24,11 @@ export const getSourcePageList = (data = {}) => {
     data: data
   })
 }
+
+// 新增资源类别列表
+export const addSource = () => {
+  return zjyrequest({
+    method: 'GET',
+    url: '/sources/addSource'
+  })
+}

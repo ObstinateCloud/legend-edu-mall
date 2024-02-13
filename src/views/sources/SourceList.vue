@@ -17,7 +17,7 @@
         </el-form-item>
         </el-form>
       </div>
-      <el-button>添加</el-button>
+      <el-button @click="handleDialog(0)">添加</el-button>
       <el-button @click="$router.push({ name: 'source-type-list'})">资源分类</el-button>
       <el-table :data="sourceData" border style="width: 100%" v-loading="isLoading">
         <el-table-column type="index" label="编号" width="50" align="center"> </el-table-column>
@@ -42,11 +42,13 @@
       :disabled="isLoading"
       >
     </el-pagination>
+    <add-source ref="sourceDialog"></add-source>
     </el-card>
 </template>
 <script>
 import dayjs from 'dayjs' // 引入三方日期处理函数 dayjs https://dayjs.fenxianglu.cn/category/display.html#%E6%A0%BC%E5%BC%8F%E5%8C%96
 import { getSourcePageList, getSourceTypeList } from '@/api/source'
+import AddSource from './AddSource.vue'
 
 // 导入对话框组件
 export default {
@@ -74,7 +76,7 @@ export default {
   methods: {
     // 添加或编辑对话框
     handleDialog (sourceId = 0) {
-      this.$refs.sourceTypeDialog.showAndInit(sourceId) // ref 代表子组件 父组件调用子组件方法
+      this.$refs.sourceDialog.showAndInit(sourceId) // ref 代表子组件 父组件调用子组件方法
     },
     loadSourceType () {
       getSourceTypeList().then((res) => {
@@ -131,7 +133,7 @@ export default {
     }
   },
   components: {
-
+    AddSource
   }
 }
 </script>
