@@ -15,3 +15,12 @@ export const addSourceType = () => {
     url: '/sources/addSourceType'
   })
 }
+
+// 查询资源列表
+export const getSourcePageList = (data = {}) => {
+  return zjyrequest({
+    method: 'POST',
+    url: '/sources/sourcePageList',
+    data: data
+  })
+}

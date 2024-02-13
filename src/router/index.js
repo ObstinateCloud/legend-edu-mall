@@ -9,6 +9,7 @@ import store from '@/store/index'
 import MenuIndex from '@/views/menu/MenuIndex'
 import AddMenu from '@/views/menu/AddMenu'
 import SourceTypeList from '@/views/sources/SourceTypeList'
+import SourceList from '@/views/sources/SourceList'
 
 Vue.use(VueRouter)
 
@@ -44,9 +45,14 @@ const routes = [
         component: AddMenu
       },
       {
-        path: 'source/source-type/list', // id传参
+        path: 'source/source-type/list',
         name: 'source-type-list',
         component: SourceTypeList
+      },
+      {
+        path: 'source/list',
+        name: 'source-list',
+        component: SourceList
       },
       {
         path: 'about',
