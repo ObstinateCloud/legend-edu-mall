@@ -9,7 +9,7 @@ import store from '@/store/index'
 import MenuIndex from '@/views/menu/MenuIndex'
 import AddMenu from '@/views/menu/AddMenu'
 import SourceTypeList from '@/views/sources/SourceTypeList'
-import SourceList from '@/views/sources/SourceList'
+// import SourceList from '@/views/sources/SourceList'
 
 Vue.use(VueRouter)
 
@@ -52,7 +52,13 @@ const routes = [
       {
         path: 'source/list',
         name: 'source-list',
-        component: SourceList
+        component: () => import('@/views/sources/SourceList') // 懒加载形式加载组件
+      },
+      {
+        path: 'menus/:sourceId/menu-tree', // 模拟给资源分配菜单
+        name: 'menu-tree',
+        component: () => import('@/views/menu/MenuTree'), // 懒加载形式加载组件
+        props: true // 把路由参数当做组件的 props属性使用
       },
       {
         path: 'about',

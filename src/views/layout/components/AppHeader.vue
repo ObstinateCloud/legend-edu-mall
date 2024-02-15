@@ -48,7 +48,6 @@ export default {
   created () {
     getUserInfo().then(res => {
       const { data } = res
-      console.log(data)
       this.userInfo = data.data
     })
   },

@@ -21,3 +21,13 @@ export const delMenu = (menuId = 0) => {
     url: `/menus/delMenu/${menuId}`
   })
 }
+// 获取资源的菜单
+export const getTreeMenus = (sourceId) => {
+  return zjyrequest({
+    method: 'GET',
+    url: '/menus/getTreeMenus',
+    params: {
+      sourceId // 此处可以简写
+    }
+  })
+}

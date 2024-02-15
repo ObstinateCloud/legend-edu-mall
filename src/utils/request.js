@@ -15,11 +15,11 @@ zjyrequest.interceptors.request.use(function (config) {
 // 添加响应拦截器 判断每个响应是否因为token过期而失败
 zjyrequest.interceptors.response.use(function (response) {
   // 响应成功
-  console.log('响应成功处理')
+  // console.log('响应成功处理')
   return response
 }, function (err) {
   // 响应失败
-  console.log('响应失败处理')
+  // console.log('响应失败处理')
   if (err.response.data.code === 401) {
     return refreshToken().then(() => {
       return zjyrequest(err.config)
