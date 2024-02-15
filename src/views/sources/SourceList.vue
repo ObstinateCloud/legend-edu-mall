@@ -22,8 +22,24 @@
       <el-table :data="sourceData" border style="width: 100%" v-loading="isLoading">
         <el-table-column type="index" label="编号" width="50" align="center"> </el-table-column>
         <el-table-column prop="name" label="姓名" align="center"> </el-table-column>
+        <el-table-column prop="avater" label="头像" align="center" v-slot="scope">
+          <el-avatar :size="30" :src="scope.row.avater || defaultAvater"></el-avatar>
+        </el-table-column>
         <el-table-column prop="createTime" label="创建时间" :formatter="timeFormatter" align="center"> </el-table-column>
         <el-table-column prop="address" label="资源路径" align="center"> </el-table-column>
+        <el-table-column  label="资源状态" align="center" v-slot="scope">
+          <el-switch
+  style="display: block"
+  v-model="scope.row.status"
+  active-color="#13ce66"
+  inactive-color="#ff4949"
+  active-text="启用"
+  inactive-text="禁用"
+  active-value="ENABLE"
+  inactive-value="DISABLE"
+  @change="handleChangeStatus(scope.row)">
+</el-switch>
+        </el-table-column>
         <el-table-column label="操作" width="380">
           <template v-slot="scope">
             <el-button size="mini" type="success" @click="$router.push({name: 'menu-tree', params: {sourceId: scope.row.id}})">分配菜单</el-button>
@@ -61,14 +77,17 @@ export default {
       queryParams: {
         id: '',
         name: '',
+        avater: '',
         address: '',
         sourceType: '',
+        status: 'DISABLED',
         index: 1,
         size: 10
       },
       sourceTypeData: [],
       queryResult: {},
-      isLoading: false
+      isLoading: false,
+      defaultAvater: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
     }
   },
   created () {
@@ -132,7 +151,14 @@ export default {
       // 给表单一个引用 sourceForm 需要在el-item上加 prop="sourceType"
       this.$refs.sourceForm.resetFields() // eleui 提供的重置方法
       this.loadSourceList()
+    },
+    handleChangeStatus (row) {
+      console.log(row.status)
+      // row.status 此时状态为变化后的状态
+      const info = row.status === 'ENABLE' ? '启用成功' : '禁用成功'
+      this.$message.success(info)
     }
+
   },
   components: {
     AddSource
