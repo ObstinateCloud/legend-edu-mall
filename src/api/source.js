@@ -32,3 +32,13 @@ export const addSource = () => {
     url: '/sources/addSource'
   })
 }
+
+export const getCityList = (sourceId) => {
+  return zjyrequest({
+    method: 'GET',
+    url: '/sources/getCityList',
+    params: {
+      sourceId
+    }
+  })
+}

@@ -24,10 +24,11 @@
         <el-table-column prop="name" label="姓名" align="center"> </el-table-column>
         <el-table-column prop="createTime" label="创建时间" :formatter="timeFormatter" align="center"> </el-table-column>
         <el-table-column prop="address" label="资源路径" align="center"> </el-table-column>
-        <el-table-column label="操作" width="280">
+        <el-table-column label="操作" width="380">
           <template v-slot="scope">
-            <el-button size="mini" @click="$router.push({name: 'menu-tree', params: {sourceId: scope.row.id}})">分配菜单</el-button>
-            <el-button size="mini" @click="handleDialog(1)">编辑</el-button>
+            <el-button size="mini" type="success" @click="$router.push({name: 'menu-tree', params: {sourceId: scope.row.id}})">分配菜单</el-button>
+            <el-button size="mini" type="primary" @click="$router.push({name: 'city-select', params: {sourceId: scope.row.id}})">分配城市</el-button>
+            <el-button size="mini" type="info" @click="handleDialog(1)">编辑</el-button>
             <el-button size="mini" type="danger" @click="delSource(scope.row.id)">删除</el-button>
           </template>
         </el-table-column>

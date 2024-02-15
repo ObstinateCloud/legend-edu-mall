@@ -45,6 +45,12 @@ const routes = [
         component: AddMenu
       },
       {
+        path: 'menus/:sourceId/menu-tree', // 模拟给资源分配菜单
+        name: 'menu-tree',
+        component: () => import('@/views/menu/MenuTree'), // 懒加载形式加载组件
+        props: true // 把路由参数当做组件的 props属性使用
+      },
+      {
         path: 'source/source-type/list',
         name: 'source-type-list',
         component: SourceTypeList
@@ -55,9 +61,9 @@ const routes = [
         component: () => import('@/views/sources/SourceList') // 懒加载形式加载组件
       },
       {
-        path: 'menus/:sourceId/menu-tree', // 模拟给资源分配菜单
-        name: 'menu-tree',
-        component: () => import('@/views/menu/MenuTree'), // 懒加载形式加载组件
+        path: 'source/:sourceId/city-select', // 模拟给资源分配菜单
+        name: 'city-select',
+        component: () => import('@/views/sources/CitySelect'), // 懒加载形式加载组件
         props: true // 把路由参数当做组件的 props属性使用
       },
       {
