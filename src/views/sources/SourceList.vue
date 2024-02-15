@@ -5,6 +5,18 @@
         <el-form-item label="资源名称" prop="name">
             <el-input v-model="queryParams.name" placeholder="资源名称" ></el-input>
         </el-form-item>
+        <el-form-item label="创建日期" prop="name">
+            <el-date-picker
+      v-model="createTimeArr"
+      type="daterange"
+      align="right"
+      unlink-panels
+      range-separator="至"
+      start-placeholder="开始日期"
+      end-placeholder="结束日期"
+      :picker-options="pickerOptions">
+    </el-date-picker>
+        </el-form-item>
         <el-form-item label="资源类别"  prop="sourceType">
     <el-select v-model="queryParams.sourceType" placeholder="资源类别">
       <el-option label="全部" value="0"></el-option>
@@ -80,6 +92,7 @@ export default {
         avater: '',
         address: '',
         sourceType: '',
+        createTime: '',
         status: 'DISABLED',
         index: 1,
         size: 10
@@ -87,7 +100,44 @@ export default {
       sourceTypeData: [],
       queryResult: {},
       isLoading: false,
-      defaultAvater: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
+      createTimeArr: [],
+      defaultAvater: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
+      pickerOptions: {
+        shortcuts: [{
+          text: '最近一周',
+          onClick (picker) {
+            const end = new Date()
+            const start = new Date()
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+            picker.$emit('pick', [start, end])
+          }
+        }, {
+          text: '最近一个月',
+          onClick (picker) {
+            const end = new Date()
+            const start = new Date()
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+            picker.$emit('pick', [start, end])
+          }
+        }, {
+          text: '最近三个月',
+          onClick (picker) {
+            const end = new Date()
+            const start = new Date()
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
+            picker.$emit('pick', [start, end])
+          }
+        }]
+      }
+    }
+  },
+  watch: { // 监听日期选择数组
+    createTimeArr: {
+      deep: true,
+      handler (newValue) {
+        console.log(newValue[0])
+        console.log(newValue[1])
+      }
     }
   },
   created () {
