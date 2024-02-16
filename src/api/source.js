@@ -56,10 +56,12 @@ export const getRoleList = (sourceId) => {
 }
 
 // 上传文件
-export const uploadFile = (data) => {
+export const uploadFile = (data, onUploadProgress) => {
   return zjyrequest({
     method: 'POST',
     url: '/sources/uploadFile',
-    data
+    data,
+    onUploadProgress // 上传图片回调
+    // onDownloadProgress, // 下载图片回调
   })
 }

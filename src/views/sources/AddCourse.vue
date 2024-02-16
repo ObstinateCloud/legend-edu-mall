@@ -22,15 +22,7 @@
   </div>
   <div v-show="curentStep === 1">
      <el-form-item label="课程封面">
-      <el-upload
-  class="avatar-uploader"
-  action="https://jsonplaceholder.typicode.com/posts/"
-  :show-file-list="false"
-  :on-success="handleAvatarSuccess"
-  :before-upload="beforeAvatarUpload">
-  <img v-if="course.imageUrl" :src="course.imageUrl" class="avatar">
-  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-</el-upload>
+      <upload-file v-model="course.imageUrl"></upload-file>
        </el-form-item>
   </div>
   <div v-show="curentStep === 2">
@@ -77,6 +69,7 @@
 <script>
 import { uploadFile } from '@/api/source'
 import TextEditor from '@/components/TextEditor'
+import UploadFile from '@/components/UploadFile'
 export default {
   name: 'AddCourse',
   data () {
@@ -148,7 +141,8 @@ export default {
     }
   },
   components: {
-    TextEditor
+    TextEditor,
+    UploadFile
   }
 
 }
@@ -166,31 +160,4 @@ export default {
 .el-step {
     cursor: pointer;
 }
-
-.avatar-uploader .el-upload {
-   border: 1px dashed #d9d9d9;
-   border-radius: 6px;
-   cursor: pointer;
-   position: relative;
-   overflow: hidden;
- }
- .avatar-uploader .el-upload:hover {
-   border-color: #409EFF;
- }
- .avatar-uploader-icon {
-   font-size: 28px;
-   color: #8c939d;
-   width: 178px;
-   height: 178px;
-   line-height: 178px;
-   text-align: center;
- }
- .avatar {
-   width: 178px;
-   height: 178px;
-   display: block;
- }
- .avatar-uploader {
-    text-align: left;
- }
 </style>
