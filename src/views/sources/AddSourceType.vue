@@ -7,6 +7,16 @@
     <el-form-item label="排序" :label-width="formLabelWidth">
       <el-input v-model="sourceType.sort" autocomplete="off"></el-input>
     </el-form-item>
+    <el-form-item label="选择角色" :label-width="formLabelWidth">
+      <el-select v-model="roleIdList" multiple placeholder="请选择">
+    <el-option
+      v-for="role in roleData"
+      :key="role.id"
+      :label="role.name"
+      :value="role.id">
+    </el-option>
+  </el-select>
+    </el-form-item>
   </el-form>
   <div slot="footer" class="dialog-footer">
     <el-button @click="dialogFormVisible = false">取 消</el-button>
@@ -15,7 +25,7 @@
 </el-dialog>
 </template>
 <script>
-import { addSourceType } from '@/api/source'
+import { addSourceType, getRoleList } from '@/api/source'
 export default {
   name: 'AddSourceType',
   data () {
@@ -26,10 +36,13 @@ export default {
         sort: ''
       },
       formLabelWidth: '120px',
-      isCreate: false // 根据路由信息中是否携带id来判断，是修改还是创建
+      isCreate: false, // 根据路由信息中是否携带id来判断，是修改还是创建
+      roleData: [],
+      roleIdList: []
     }
   },
   created () {
+    this.loadRoles()
   },
   computed: {
     title () {
@@ -58,6 +71,19 @@ export default {
       } else {
         console.log('编辑')
       }
+    },
+    loadRoles () {
+      getRoleList().then((res) => {
+        if (res.data.code === 200) {
+          const { data } = res.data
+          this.roleIdList = data.filter(role => role.owner
+          ).map((role) => {
+            const { id } = role
+            return id
+          })
+          this.roleData = data
+        }
+      })
     }
   }
 }

@@ -33,10 +33,22 @@ export const addSource = () => {
   })
 }
 
+// 获取城市列表
 export const getCityList = (sourceId) => {
   return zjyrequest({
     method: 'GET',
     url: '/sources/getCityList',
+    params: {
+      sourceId
+    }
+  })
+}
+
+// 获取角色列表
+export const getRoleList = (sourceId) => {
+  return zjyrequest({
+    method: 'GET',
+    url: '/sources/getRoleList',
     params: {
       sourceId
     }
