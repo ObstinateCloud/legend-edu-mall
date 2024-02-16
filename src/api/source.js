@@ -54,3 +54,12 @@ export const getRoleList = (sourceId) => {
     }
   })
 }
+
+// 上传文件
+export const uploadFile = (data) => {
+  return zjyrequest({
+    method: 'POST',
+    url: '/sources/uploadFile',
+    data
+  })
+}

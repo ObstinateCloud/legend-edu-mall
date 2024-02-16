@@ -67,6 +67,17 @@ const routes = [
         props: true // 把路由参数当做组件的 props属性使用
       },
       {
+        path: 'source/add-course', // 模拟给资源新建课程
+        name: 'add-course',
+        component: () => import('@/views/sources/AddCourse') // 懒加载形式加载组件
+      },
+      {
+        path: 'source/:sourceId/edit-course', // 模拟给资源编辑课程
+        name: 'edit-course',
+        component: () => import('@/views/sources/AddCourse'), // 懒加载形式加载组件
+        props: true // 把路由参数当做组件的 props属性使用
+      },
+      {
         path: 'about',
         name: 'about',
         component: About,

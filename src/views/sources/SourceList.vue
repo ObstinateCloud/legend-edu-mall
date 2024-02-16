@@ -29,7 +29,8 @@
         </el-form-item>
         </el-form>
       </div>
-      <el-button @click="handleDialog(0)">添加</el-button>
+      <el-button @click="handleDialog(0)">添加资源</el-button>
+      <el-button @click="$router.push({name: 'add-course'})">添加课程</el-button>
       <el-button @click="$router.push({ name: 'source-type-list'})">资源分类</el-button>
       <el-table :data="sourceData" border style="width: 100%" v-loading="isLoading">
         <el-table-column type="index" label="编号" width="50" align="center"> </el-table-column>
@@ -52,11 +53,12 @@
   @change="handleChangeStatus(scope.row)">
 </el-switch>
         </el-table-column>
-        <el-table-column label="操作" width="380">
+        <el-table-column label="操作" width="450">
           <template v-slot="scope">
             <el-button size="mini" type="success" @click="$router.push({name: 'menu-tree', params: {sourceId: scope.row.id}})">分配菜单</el-button>
             <el-button size="mini" type="primary" @click="$router.push({name: 'city-select', params: {sourceId: scope.row.id}})">分配城市</el-button>
-            <el-button size="mini" type="info" @click="handleDialog(1)">编辑</el-button>
+            <el-button size="mini" type="info" @click="handleDialog(1)">编辑资源</el-button>
+            <el-button size="mini" type="info" @click="$router.push({name: 'edit-course', params: { sourceId: scope.row.id}})">编辑课程</el-button>
             <el-button size="mini" type="danger" @click="delSource(scope.row.id)">删除</el-button>
           </template>
         </el-table-column>
