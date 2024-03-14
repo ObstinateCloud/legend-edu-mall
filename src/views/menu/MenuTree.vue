@@ -25,7 +25,10 @@ export default {
       menuTreeData: [],
       defaultProps: {
         children: 'children',
-        label: 'label'
+        // label: 'label' // 父子节点都使用同样的key
+        label (data, node) {
+          return data.label || data.name // 父子节点使用不同的key
+        }
       },
       checkedMenuIds: []
     }
